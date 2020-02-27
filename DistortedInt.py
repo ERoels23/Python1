@@ -45,6 +45,7 @@ def DistortedRootsOfOne(n,a):
             lst.append(str(q))
     return lst
 
+# main for testing purposes...
 if __name__ == "__main__":
     for i in range(1,10):
         for j in range(i):
