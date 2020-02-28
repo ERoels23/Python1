@@ -9,15 +9,15 @@ class DistortedInt:
 # define "*"
     def __mul__(self,other):
         if (self.alpha == other.alpha) & (self.n == other.n):
-            return DistortedInt((self.alpha*self.object + (1-self.alpha)*other.object)%(self.n), self.n, self.alpha)
+            return DistortedInt((self.alpha*self.object + (1-self.alpha)*other.object)% self.n, self.n, self.alpha)
         else:
             print("Values must share 'n' and 'alpha' values")
         # return DistortedInt(2*self.object-other.object)
     def __eq__(self,other):
-        if isinstance(other, self.__class__):
-            return self.__dict__ == other.__dict__
-        else:
-            return False
+        return isinstance(other, self.__class__) and self.alpha == other.alpha and self.n == other.n and self.object == other.object
+            # return self.__dict__ == other.__dict__
+        # else:
+        #     return False
 
     def __ne__(self,other):
         return not self.__eq__(other)
@@ -29,24 +29,96 @@ class DistortedInt:
 
 # needs to be tested more, but works as far as I can tell
 def HasDistortedIdempotentProperty(n,a):
-    check = True
-    for i in range(1,n):
+    # range of Zn (ex. Z1 = {0} as provided in spec)
+    for i in range(n):
         q = DistortedInt(i,n,a)
         if q*q != q:
-            check = False
-    return check
+            return False
+    return True
 
-# returns the empty list for n=1, a=0, this should not happen
+# returns the empty list for n=1, a=0, this should not happen, come back to
 def DistortedRootsOfOne(n,a):
     lst = []
-    for i in range(1,n):
+    for i in range(n):
         q = DistortedInt(i,n,a)
         if q*q == DistortedInt(1,n,a):
-            lst.append(str(q))
+            lst.append(q*q)
     return lst
+
+
+def TestHasDistortedIdempotentProperty():
+    # 1 - 100
+    for n in range(1, 101):
+        # 0 - (n-1)
+        for alpha in range(n):
+            if (not HasDistortedIdempotentProperty(n, alpha)):
+                return False
+    return True
+
+# since 1 E Zn, start from 2 rather than 1???
+def TestDistortedRootsOfOne():
+    # 1 - 100
+    for n in range(2,101):
+        # 0 - (n-1)
+        for alpha in range(n):
+            if (len(DistortedRootsOfOne(n, alpha)) != 1):
+                print(n)
+                print(alpha)
+                return False
+    return True
+
+def IsCommutativeDistortedMultiplication(n, alpha):
+    for x in range(n):
+        for y in range(n):
+            first = DistortedInt(x, n, alpha)
+            second = DistortedInt(y,n,alpha)
+            if (first*second != second*first):
+                return False
+    return True
+
+def TestIsCommutativeDistortedMultiplication():
+    # 1 - 100
+    for n in range(1, 101):
+        # 0 - (n-1)
+        for alpha in range(n):
+            if (IsCommutativeDistortedMultiplication(n, alpha) and n % 2 == 0):
+                print("n: " + str(n) + "  " + "a: " + str(alpha))
+                return False
+    return True
+
+
+def IsQuasiDistributiveDistortedMultiplication(n, alpha):
+    for x in range(n):
+        for y in range(n):
+            for z in range(n):
+                xD = DistortedInt(x, n, alpha)
+                yD = DistortedInt(y, n, alpha)
+                zD = DistortedInt(z, n, alpha)
+                if (((x*y)*z) != ((x*y)*(x*z))):
+                    return False
+    return True
+
+
+def TestIsQuasiDistributiveDistortedMultiplication():
+    l = []
+    # 1 - 20
+    for n in range(1, 21):
+        # 0 - (n-1)
+        for alpha in range(n):
+            if (IsCommutativeDistortedMultiplication(n, alpha)):
+                l.append("n: " + str(n) + " " + "alpha: " + str(alpha))
+    return l
+
+
+
 
 # main for testing purposes...
 if __name__ == "__main__":
-    for i in range(1,10):
-        for j in range(i):
-            print(DistortedRootsOfOne(i,j))
+    print("Testing Idempotent Property: " + str(TestHasDistortedIdempotentProperty()))
+    print("Testing Roots of One: " + str(TestDistortedRootsOfOne()))
+    print("Testing Commutative Multiplication: " + str(TestIsCommutativeDistortedMultiplication()))
+    print("Testing Quasi Distributive Multiplication: " + str(TestIsQuasiDistributiveDistortedMultiplication()))
+
+    # for i in range(1,10):
+    #     for j in range(i):
+    #         print(DistortedRootsOfOne(i,j))
