@@ -19,7 +19,6 @@ class DistortedInt:
             # return self.__dict__ == other.__dict__
         # else:
         #     return False
-
     def __ne__(self,other):
         return not self.__eq__(other)
 
@@ -27,6 +26,21 @@ class DistortedInt:
 # # make sure input is valid
 # # n is negative?
 # # if obj or alpha NOT in Z_n
+
+class DistortedIntegers:
+    def __init__(self, z, n):
+        self.n = n
+        self.z = list(range(n))
+
+    def __str__(self):
+        return "Z(n=" + str(self.n) + ") = " + str(self.z)
+
+    def size(self):
+        return n
+
+
+
+
 
 # needs to be tested more, but works as far as I can tell
 def HasDistortedIdempotentProperty(n,a):
@@ -131,6 +145,13 @@ if __name__ == "__main__":
     print("Testing Roots of One: " + str(TestDistortedRootsOfOne()))
     print("Testing Commutative Multiplication: " + str(TestIsCommutativeDistortedMultiplication()))
     print("Testing Quasi Distributive Multiplication: " + str(TestIsQuasiDistributiveDistortedMultiplication()))
+    print("Testing Associative Distorted Multiplication")
+    assoc = []
+    for n in range(1,21):
+        for a in range(n):
+            if IsAssociativeDistortedMultiplication(n, a):
+                assoc.append((n,a))
+    print(assoc)
 
     # for i in range(1,10):
     #     for j in range(i):
