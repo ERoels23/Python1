@@ -56,7 +56,7 @@ def TestHasDistortedIdempotentProperty():
                 return False
     return True
 
-# since 1 E Zn, start from 2 rather than 1???
+# since 1 is in Zn, start from 2 rather than 1???
 def TestDistortedRootsOfOne():
     # 1 - 100
     for n in range(2,101):
@@ -76,6 +76,17 @@ def IsCommutativeDistortedMultiplication(n, alpha):
             second = DistortedInt(y,n,alpha)
             if (first*second != second*first):
                 return False
+    return True
+
+def IsAssociativeDistortedMultiplication(n, alpha):
+    for x in range(n):
+        first = DistortedInt(x,n,alpha)
+        for y in range(x,n):
+            second = DistortedInt(y,n,alpha)
+            for z in range(y,n):
+                third = DistortedInt(z,n,alpha)
+                if (((first*second)*third) != (first*(second*third))):
+                    return False
     return True
 
 def TestIsCommutativeDistortedMultiplication():
