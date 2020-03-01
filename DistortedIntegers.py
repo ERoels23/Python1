@@ -1,6 +1,6 @@
 from DistortedInt import DistortedInt
-from itertools import combinations
-import numpy
+from itertools import combinations, permutations
+from functools import reduce
 
 class DistortedIntegers:
     # initialisation
@@ -38,21 +38,71 @@ class IteratorOfDistortedIntegers:
             return DistortedInt(self.start-1, self.distortedInteger.n, self.distortedInteger.alpha)
         raise StopIteration
 
+def HasDistortedEquationProperty(n,alpha):
+    for x in IteratorOfDistortedIntegers(DistortedIntegers(n,alpha)):
+        for y in IteratorOfDistortedIntegers(DistortedIntegers(n,alpha)):
+            # looking for unique y
+            if y == x:
+                continue
+            for z in IteratorOfDistortedIntegers(DistortedIntegers(n,alpha)):
+                # looking for unique y
+                if y == z:
+                    continue
+                if (x*y == z):
+                    print()
+                    print(x)
+                    print(z)
+                    print(y)
+                    print()
+                    return True
+    return False
+
+
+def TestHasDistortedEquationProperty():
+    l = []
+    for n in range(1,21):
+        for alpha in range(n):
+            if HasDistortedEquationProperty(n,alpha):
+                l.append("n: " + str(n) + " " + "alpha: " + str(alpha))
+    return l
+
+
+def calc(distortedInts):
+    resultSet = set()
+    useCombos = False
+    # if associative, ie. odd modulus, so x*y = y*x
+    if distortedInts[0].n % 2 != 0:
+        useCombos = True
+    for i in range(2, len(distortedInts)+1):
+        if(len(resultSet) == 2):
+            print("")
+        # if associative, ie. odd modulus, so x*y = y*x
+        if (useCombos):
+            for j in combinations(distortedInts, i):
+                result = reduce((lambda x, y: x * y), j)
+                resultSet.add(str(result))
+        else:
+            for k in permutations(distortedInts, i):
+                result = reduce((lambda x, y: x * y), k)
+                resultSet.add(str(result))
+    return resultSet
 
 
 
 if __name__ == "__main__":
-    test = [1,2,3,4]
-    list = []
-    for i in range(1, len(test)):
-        result = 1
-        for j in combinations(test, i):
-            for k in j:
-                result *= k
-        list.append(result)
+    a = DistortedInt(1,5,3)
+    b = DistortedInt(4,5,3)
+    c = DistortedInt(3,5,3)
+    d = DistortedInt(2,5,3)
+    e = DistortedInt(0,5,3)
+    test = [a,b,c,d,e]
+    r = calc(test)
 
-    for y in list:
-        print(y)
+    for i in r:
+        print(i)
 
-    for x in IteratorOfDistortedIntegers(DistortedIntegers(3,2)):
-        print(x)
+    print("Testing Distorted Equation Property: " + str(TestHasDistortedEquationProperty()))
+
+
+    # for x in IteratorOfDistortedIntegers(DistortedIntegers(3,2)):
+    #     print(x)
