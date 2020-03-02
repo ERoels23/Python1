@@ -39,23 +39,14 @@ class IteratorOfDistortedIntegers:
         raise StopIteration
 
 def HasDistortedEquationProperty(n,alpha):
+    l = []
     for x in IteratorOfDistortedIntegers(DistortedIntegers(n,alpha)):
         for y in IteratorOfDistortedIntegers(DistortedIntegers(n,alpha)):
-            # looking for unique y
-            if y == x:
-                continue
             for z in IteratorOfDistortedIntegers(DistortedIntegers(n,alpha)):
-                # looking for unique y
-                if y == z:
-                    continue
                 if (x*y == z):
-                    print()
-                    print(x)
-                    print(z)
-                    print(y)
-                    print()
-                    return True
-    return False
+                    l.append(y)
+    # unique y, so much be length 1
+    return len(l) == 1
 
 
 def TestHasDistortedEquationProperty():
@@ -67,39 +58,47 @@ def TestHasDistortedEquationProperty():
     return l
 
 
-def calc(distortedInts):
-    resultSet = set()
-    useCombos = False
-    # if associative, ie. odd modulus, so x*y = y*x
-    if distortedInts[0].n % 2 != 0:
-        useCombos = True
-    for i in range(2, len(distortedInts)+1):
-        if(len(resultSet) == 2):
-            print("")
-        # if associative, ie. odd modulus, so x*y = y*x
-        if (useCombos):
-            for j in combinations(distortedInts, i):
-                result = reduce((lambda x, y: x * y), j)
-                resultSet.add(str(result))
+# def calc(distortedInts):
+#     resultSet = set()
+#     # go through every number of combinations ex. [1,2,3] = permute 2, permute 3
+#     for i in range(2, len(distortedInts)+1):
+#         # go through every possible combination
+#         for k in permutations(distortedInts, i):
+#             result = reduce((lambda x, y: x * y), k)
+#             # converted to string to avoid duplicate distorted ints
+#             resultSet.add(str(result))
+#     return resultSet
+
+def generatorSpanCalculation(generators: [DistortedInt], current, results):
+    for val in generators:
+        result = current * val
+        # if our current result is not in our list of previous results, continue down branch
+        if not (str(result) in results):
+            # add to our results, as string
+            results.append(str(result))
+            # recurse down branch with our result and list of results
+            generatorSpanCalculation(generators, result, results)
+        # result is in our list of results, cut off branch
         else:
-            for k in permutations(distortedInts, i):
-                result = reduce((lambda x, y: x * y), k)
-                resultSet.add(str(result))
-    return resultSet
+            continue
 
+def spanInit(generators: [DistortedInt]):
+    results = []
+    for gen in generators:
+        # equivalent to gen*gen
+        results.append(str(gen))
+        # begin recursion
+        generatorSpanCalculation(generators, gen, results)
+    return results
 
+if __name__ == '__main__':
+    x1 = DistortedInt(18,20,11)
+    x2 = DistortedInt(7,20,11)
+    x3 = DistortedInt(10,20,11)
 
-if __name__ == "__main__":
-    a = DistortedInt(1,5,3)
-    b = DistortedInt(4,5,3)
-    c = DistortedInt(3,5,3)
-    d = DistortedInt(2,5,3)
-    e = DistortedInt(0,5,3)
-    test = [a,b,c,d,e]
-    r = calc(test)
+    vals = [x1,x2,x3]
 
-    for i in r:
-        print(i)
+    print(spanInit(vals))
 
     print("Testing Distorted Equation Property: " + str(TestHasDistortedEquationProperty()))
 
