@@ -58,47 +58,52 @@ def TestHasDistortedEquationProperty():
     return l
 
 
-# def calc(distortedInts):
-#     resultSet = set()
-#     # go through every number of combinations ex. [1,2,3] = permute 2, permute 3
-#     for i in range(2, len(distortedInts)+1):
-#         # go through every possible combination
-#         for k in permutations(distortedInts, i):
-#             result = reduce((lambda x, y: x * y), k)
-#             # converted to string to avoid duplicate distorted ints
-#             resultSet.add(str(result))
-#     return resultSet
+def calc(distortedInts):
+    resultSet = set()
+    # go through every number of combinations ex. [1,2,3] = permute 2, permute 3
+    for i in range(2, len(distortedInts)+1):
+        # go through every possible combination
+        for k in permutations(distortedInts, i):
+            result = reduce((lambda x, y: x * y), k)
+            # converted to string to avoid duplicate distorted ints
+            resultSet.add(str(result))
+    return resultSet
 
-def generatorSpanCalculation(generators: [DistortedInt], current, results):
+def recursiveResultFinder(generators: [DistortedInt], current, results):
     for val in generators:
-        result = current * val
-        # if our current result is not in our list of previous results, continue down branch
-        if not (str(result) in results):
-            # add to our results, as string
-            results.append(str(result))
-            # recurse down branch with our result and list of results
-            generatorSpanCalculation(generators, result, results)
+        res = current * val
         # result is in our list of results, cut off branch
-        else:
+        if str(res) in results:
             continue
+        # if our current result is not in our list of previous results, continue down branch
+        else:
+            results.add(str(res))
+            # recurse down branch with our result and list of results
+            recursiveResultFinder(generators, res, results)
 
+# initialiser to find span of distortedInt tree
 def spanInit(generators: [DistortedInt]):
-    results = []
+    results = set()
     for gen in generators:
-        # equivalent to gen*gen
-        results.append(str(gen))
+        results.add(str(gen))
         # begin recursion
-        generatorSpanCalculation(generators, gen, results)
-    return results
+        recursiveResultFinder(generators, gen, results)
+    return results # return list of distortedInts in tree span found
 
 if __name__ == '__main__':
-    x1 = DistortedInt(18,20,11)
-    x2 = DistortedInt(7,20,11)
-    x3 = DistortedInt(10,20,11)
+    a = DistortedInt(4,7,3)
+    b = DistortedInt(5,7,3)
+    c = DistortedInt(6,7,3)
 
-    vals = [x1,x2,x3]
+    vals = [a,b,c]
+    # test = calc(vals)
+    #
+    # for i in test:
+    #     print(i)
 
-    print(spanInit(vals))
+    s = spanInit(vals)
+    for i in s:
+        print(i)
 
     print("Testing Distorted Equation Property: " + str(TestHasDistortedEquationProperty()))
 
