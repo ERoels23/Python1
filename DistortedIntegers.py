@@ -59,16 +59,16 @@ def HasDistortedEquationProperty(n,alpha):
     for x in IteratorOfDistortedIntegers(DistortedIntegers(n,alpha)):
         for z in IteratorOfDistortedIntegers(DistortedIntegers(n,alpha)):
             # for every x and z there is a unique y for x*y = z
-            l = []
+            count = 0
             # check every y for x and z
             for y in IteratorOfDistortedIntegers(DistortedIntegers(n,alpha)):
                 if (x*y == z):
                     # add to list of it working
-                    l.append(y)
+                    count++
             # add length of list of equality holding
-            successes.append(len(l))
+            successes.append(count)
     # return true if unique, ie. all lists have length 1
-    return all(length == 1 for length in successes)
+    return all(count == 1 for count in successes)
 
 
 
@@ -77,7 +77,7 @@ def TestHasDistortedEquationProperty():
     for n in range(1,21):
         for alpha in range(n):
             if HasDistortedEquationProperty(n,alpha):
-                l.append("n: " + str(n) + " " + "alpha: " + str(alpha))
+                l.append((n,alpha))
     return l
 
 

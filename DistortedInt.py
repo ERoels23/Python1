@@ -58,7 +58,8 @@ def TestDistortedRootsOfOne():
 
 def IsCommutativeDistortedMultiplication(n, alpha):
     for x in range(n):
-        # avoids redundant checks ex. if 0*1 = 1*0, don't need to check 1*0 = 0*1
+        # avoids redundant checks ex. if 0*1 = 1*0,
+        # don't need to check 1*0 = 0*1
         for y in range(x,n):
             first = DistortedInt(x, n, alpha)
             second = DistortedInt(y,n,alpha)
