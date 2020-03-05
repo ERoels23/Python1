@@ -1,14 +1,32 @@
 class DistortedInt:
+    '''
+    encapsulates a Distorted Integer <object mod n | alpha>
+    where x*y = (a*x + (1-a)*y)%n
+    '''
     def __init__(self, obj, n, alpha):
+        '''
+        Construct a new 'DistortedInt' object.
+
+        :param obj: the object of the DistortedInt
+        :param n: the modulus of the DistortedInt
+        :param alpha: the distortion of the DistortedInt
+        '''
         self.object = obj
         self.alpha = alpha
         self.n = n
     # overwrite "print"
     def __str__(self):
+        '''
+        returns a string representation of a DistortedInt object
+        '''
         return "< "+str(self.object)+" mod "+str(self.n)+" | "+str(self.alpha)+" >"
 
     # define "*"
     def __mul__(self,other):
+        '''
+        redefines multiplication according to DistortedInt Multiplication
+        where x*y = (a*x + (1-a)*y)%n
+        '''
         if (self.alpha == other.alpha) & (self.n == other.n):
             return DistortedInt((self.alpha*self.object + (1-self.alpha)*other.object) % self.n, self.n, self.alpha)
         else:
@@ -37,9 +55,6 @@ class DistortedIntegers:
 
     def size(self):
         return n
-
-
-
 
 
 # needs to be tested more, but works as far as I can tell
@@ -92,6 +107,16 @@ def IsCommutativeDistortedMultiplication(n, alpha):
                 return False
     return True
 
+def TestIsCommutativeDistortedMultiplication():
+    # 1 - 100
+    for n in range(1, 101):
+        # 0 - (n-1)
+        for alpha in range(n):
+            if (IsCommutativeDistortedMultiplication(n, alpha) and n % 2 == 0):
+                print("n: " + str(n) + "  " + "a: " + str(alpha))
+                return False
+    return True
+
 def IsAssociativeDistortedMultiplication(n, alpha):
     for x in range(n):
         first = DistortedInt(x,n,alpha)
@@ -103,16 +128,13 @@ def IsAssociativeDistortedMultiplication(n, alpha):
                     return False
     return True
 
-def TestIsCommutativeDistortedMultiplication():
-    # 1 - 100
-    for n in range(1, 101):
-        # 0 - (n-1)
-        for alpha in range(n):
-            if (IsCommutativeDistortedMultiplication(n, alpha) and n % 2 == 0):
-                print("n: " + str(n) + "  " + "a: " + str(alpha))
-                return False
-    return True
-
+def TestIsAssociativeDistortedMultiplication():
+    lst = []
+    for n in range(1,21):
+        for a in range(n):
+            if IsAssociativeDistortedMultiplication(n, a):
+                lst.append((n,a))
+    return lst
 
 def IsQuasiDistributiveDistortedMultiplication(n, alpha):
     for x in range(n):
