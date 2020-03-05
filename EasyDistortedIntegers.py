@@ -51,13 +51,21 @@ def IsCommutativeDistortedMultiplication(n, alpha):
     return True
 
 def TestIsCommutativeDistortedMultiplication():
+    l = []
     # 1 - 100
     for n in range(1, 101):
         # 0 - (n-1)
         for alpha in range(n):
-            if (IsCommutativeDistortedMultiplication(n, alpha) and n % 2 == 0):
-                print("n: " + str(n) + "  " + "a: " + str(alpha))
-                return False
+            if IsCommutativeDistortedMultiplication(n, alpha):
+                l.append((n,alpha))
+    return l
+
+def IsAssociativeDistortedMultiplication(n, alpha):
+    for x in IteratorOfDistortedIntegers(DistortedIntegers(n,alpha)):
+        for y in IteratorOfDistortedIntegers(DistortedIntegers(n,alpha)):
+            for z in IteratorOfDistortedIntegers(DistortedIntegers(n,alpha)):
+                if (((x*y)*z) != (x*(y*z))):
+                    return False
     return True
 
 
@@ -76,13 +84,24 @@ def TestIsQuasiDistributiveDistortedMultiplication():
     for n in range(1, 21):
         # 0 - (n-1)
         for alpha in range(n):
-            if (IsCommutativeDistortedMultiplication(n, alpha)):
-                l.append("n: " + str(n) + " " + "alpha: " + str(alpha))
+            if (IsQuasiDistributiveDistortedMultiplication(n, alpha)):
+                l.append((n,alpha))
     return l
+
+def TestIsAssociativeDistortedMultiplication():
+    assoc = []
+    for n in range(1,21):
+        for a in range(n):
+            if IsAssociativeDistortedMultiplication(n, a):
+                assoc.append((n,a))
+    return assoc
 
 # main for testing purposes...
 if __name__ == "__main__":
     print("Testing Idempotent Property: " + str(TestHasDistortedIdempotentProperty()))
     print("Testing Roots of One: " + str(TestDistortedRootsOfOne()))
-    print("Testing Commutative Multiplication: " + str(TestIsCommutativeDistortedMultiplication()))
+    commutativeList = TestIsCommutativeDistortedMultiplication()
+    print("Testing Commutative Multiplication: " + str(commutativeList))
+    print("Testing all odd modulus Commutative Multiplication: " + str(all(n % 2 != 0 for (n,a) in commutativeList)))
     print("Testing Quasi Distributive Multiplication: " + str(TestIsQuasiDistributiveDistortedMultiplication()))
+    print("Testing Associative Distorted Multiplication: " + str(TestIsAssociativeDistortedMultiplication()))
