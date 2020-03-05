@@ -14,6 +14,7 @@ class DistortedInt:
         self.object = obj
         self.alpha = alpha
         self.n = n
+
     # overwrite "print"
     def __str__(self):
         '''
@@ -31,33 +32,15 @@ class DistortedInt:
             return DistortedInt((self.alpha*self.object + (1-self.alpha)*other.object) % self.n, self.n, self.alpha)
         else:
             print("Values must share 'n' and 'alpha' values")
-        # return DistortedInt(2*self.object-other.object)
+
     def __eq__(self,other):
         return isinstance(other, self.__class__) and self.alpha == other.alpha and self.n == other.n and self.object == other.object
-            # return self.__dict__ == other.__dict__
-        # else:
-        #     return False
-    def __ne__(self,other):
-        return not self.__eq__(other)
 
-# Still to implement:
-# # make sure input is valid
-# # n is negative?
-# # if obj or alpha NOT in Z_n
-
-class DistortedIntegers:
-    def __init__(self, z, n):
-        self.n = n
-        self.z = list(range(n))
-
-    def __str__(self):
-        return "Z(n=" + str(self.n) + ") = " + str(self.z)
-
-    def size(self):
-        return n
-
-
+<<<<<<< HEAD
 # needs to be tested more, but works as far as I can tell
+=======
+
+>>>>>>> 04162b3cc95c6583bde4607df1a1f7441be80fa6
 def HasDistortedIdempotentProperty(n,a):
     # range of Zn (ex. Z1 = {0} as provided in spec)
     for i in range(n):
@@ -92,8 +75,6 @@ def TestDistortedRootsOfOne():
         # 0 - (n-1)
         for alpha in range(n):
             if (len(DistortedRootsOfOne(n, alpha)) != 1):
-                print(n)
-                print(alpha)
                 return False
     return True
 
@@ -128,6 +109,7 @@ def IsAssociativeDistortedMultiplication(n, alpha):
                     return False
     return True
 
+<<<<<<< HEAD
 def TestIsAssociativeDistortedMultiplication():
     lst = []
     for n in range(1,21):
@@ -135,6 +117,18 @@ def TestIsAssociativeDistortedMultiplication():
             if IsAssociativeDistortedMultiplication(n, a):
                 lst.append((n,a))
     return lst
+=======
+def TestIsCommutativeDistortedMultiplication():
+    l = []
+    # 1 - 100
+    for n in range(1, 101):
+        # 0 - (n-1)
+        for alpha in range(n):
+            if IsCommutativeDistortedMultiplication(n, alpha):
+                l.append((n,alpha))
+    return l
+
+>>>>>>> 04162b3cc95c6583bde4607df1a1f7441be80fa6
 
 def IsQuasiDistributiveDistortedMultiplication(n, alpha):
     for x in range(n):
@@ -154,27 +148,25 @@ def TestIsQuasiDistributiveDistortedMultiplication():
     for n in range(1, 21):
         # 0 - (n-1)
         for alpha in range(n):
-            if (IsCommutativeDistortedMultiplication(n, alpha)):
-                l.append("n: " + str(n) + " " + "alpha: " + str(alpha))
+            if (IsQuasiDistributiveDistortedMultiplication(n, alpha)):
+                l.append((n, alpha))
     return l
 
-
+def TestIsAssociativeDistortedMultiplication():
+    assoc = []
+    for n in range(1,21):
+        for a in range(n):
+            if IsAssociativeDistortedMultiplication(n, a):
+                assoc.append((n,a))
+    return assoc
 
 
 # main for testing purposes...
 if __name__ == "__main__":
     print("Testing Idempotent Property: " + str(TestHasDistortedIdempotentProperty()))
     print("Testing Roots of One: " + str(TestDistortedRootsOfOne()))
-    print("Testing Commutative Multiplication: " + str(TestIsCommutativeDistortedMultiplication()))
+    commutativeList = TestIsCommutativeDistortedMultiplication()
+    print("Testing Commutative Multiplication: " + str(commutativeList))
+    print("Testing all odd modulus Commutative Multiplication: " + str(all(n % 2 != 0 for (n,a) in commutativeList)))
     print("Testing Quasi Distributive Multiplication: " + str(TestIsQuasiDistributiveDistortedMultiplication()))
-    print("Testing Associative Distorted Multiplication")
-    assoc = []
-    for n in range(1,21):
-        for a in range(n):
-            if IsAssociativeDistortedMultiplication(n, a):
-                assoc.append((n,a))
-    print(assoc)
-
-    # for i in range(1,10):
-    #     for j in range(i):
-    #         print(DistortedRootsOfOne(i,j))
+    print("Testing Associative Distorted Multiplication: " + str(TestIsAssociativeDistortedMultiplication()))
