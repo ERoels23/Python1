@@ -34,7 +34,7 @@ class IteratorOfDistortedIntegers:
         '''
         Construct a new IteratorOfDistortedIntegers object
 
-        :param d: the DistortedIntegers list to be iterated through
+        :param d: the DistortedInteger to iterate through
         '''
         self.distortedInteger = d
         self.start = 0
@@ -49,7 +49,7 @@ class IteratorOfDistortedIntegers:
         '''
         advances the Iterator to the next element in the list DistortedIntegers
         '''
-        if self.start < self.distortedInteger.size:
+        if self.start < self.distortedInteger.size():
             self.start += 1
             return DistortedInt(self.start-1, self.distortedInteger.n, self.distortedInteger.alpha)
         else:
