@@ -1,4 +1,5 @@
 import unittest
+import coverage
 from DistortedInt import *
 from DistortedIntegers import *
 from EasyDistortedIntegers import *
@@ -125,6 +126,14 @@ class TestingDistortedInt(unittest.TestCase):
         print(str(l))
         c = ["<0 mod 3 | 2 >","<1 mod 3 | 2 >","<2 mod 3 | 2 >"]
         self.assertTrue(l == c)
+
+    def test_SpanInit(self):
+        print("Testing spanInit Test Cases: ")
+        vals = [DistortedInt(1,5,3), DistortedInt(2,5,3)]
+        s = spanInit(vals)
+        # expected result:
+        r = ["<1 mod 5 | 3 >", "<4 mod 5 | 3 >", "<0 mod 5 | 3 >", "<3 mod 5 | 3 >", "<2 mod 5 | 3 >"]
+        self.assertTrue(s == r)
 
 if __name__ == '__main__':
     unittest.main()

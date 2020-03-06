@@ -52,8 +52,6 @@ class IteratorOfDistortedIntegers:
     def __next__(self):
         return next(self.distortedInteger.gen)
 
-
-
 def HasDistortedEquationProperty(n,alpha):
     successes = []
     for x in IteratorOfDistortedIntegers(DistortedIntegers(n,alpha)):
@@ -114,18 +112,9 @@ def spanInit(generators: [DistortedInt]):
     return results # return list of distortedInts in tree span found
 
 if __name__ == '__main__':
-    #testing purposes only
-    a = DistortedInt(1,5,3)
-    b = DistortedInt(2,5,3)
-    # c = DistortedInt(6,7,3)
-
-    vals = [a,b]
-    # test = calc(vals)
-    #
-    # for i in test:
-    #     print(i)
-
+    # testing purposes only
+    # doesn't do anything at the moment
+    vals = [DistortedInt(1,5,3), DistortedInt(2,5,3)]
+    print(vals)
     s = spanInit(vals)
-    s.sort()
-    for i in s:
-        print(i)
+    print(s)
