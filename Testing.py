@@ -4,7 +4,7 @@ from DistortedInt import *
 from DistortedIntegers import *
 from EasyDistortedIntegers import *
 
-def IdempotentTest(idem):
+def idempotentTest(idem):
     flipper = True
     for n in range(1, 101):
         for alpha in range(n):
@@ -12,7 +12,7 @@ def IdempotentTest(idem):
                 flipper = False
     return flipper
 
-def RootsTest(root):
+def rootsTest(root):
     flipper = True
     for n in range(1,101):
         for alpha in range(n):
@@ -20,7 +20,7 @@ def RootsTest(root):
                 flipper = False
     return flipper
 
-def CommutativeTest(comm):
+def commutativeTest(comm):
     l = []
     for n in range(1, 101):
         for alpha in range(n):
@@ -28,7 +28,7 @@ def CommutativeTest(comm):
                 l.append((n,alpha))
     return l
 
-def AssociativeTest(func):
+def associativeTest(func):
     assoc = []
     for n in range(1,21):
         for a in range(n):
@@ -110,24 +110,24 @@ class TestingDistortedInt(unittest.TestCase):
     # Idempotent Property
     def test_HasDistortedIdempotentProperty(self):
         print("\nTesting Idempotent Property: ")
-        self.assertTrue(IdempotentTest(HasDistortedIdempotentProperty))
+        self.assertTrue(idempotentTest(HasDistortedIdempotentProperty))
         print("\nTesting Idempotent Property (with Iterator): ")
-        self.assertTrue(IdempotentTest(IterDistortedIdempotentProperty))
+        self.assertTrue(idempotentTest(IterDistortedIdempotentProperty))
 
     # Distorted Roots of One
     def test_DistortedRootsOfOne(self):
         print("\nTesting Roots of One: ")
-        self.assertTrue(RootsTest(DistortedRootsOfOne))
+        self.assertTrue(rootsTest(DistortedRootsOfOne))
         print("\nTesting Roots of One (with Iterator): ")
-        self.assertTrue(RootsTest(IterDistortedRootsOfOne))
+        self.assertTrue(rootsTest(IterDistortedRootsOfOne))
 
     # Commutative Distorted Multiplication
     def test_CommutativeDistortedMultiplication(self):
-        result = CommutativeTest(IsCommutativeDistortedMultiplication)
+        result = commutativeTest(IsCommutativeDistortedMultiplication)
         print("\nTesting Commutative Multiplication: " + str(result))
         print("\nTesting for All Odd Modulus: " + str(all(n % 2 != 0 for (n,a) in result)))
         print("\nTesting Commutative Mult with Iterator: ")
-        iterResult = CommutativeTest(IterIsCommutativeDistortedMultiplication)
+        iterResult = commutativeTest(IterIsCommutativeDistortedMultiplication)
         self.assertTrue(result == iterResult) # must be all odd as well
 
     # Associative Distorted Multiplication
@@ -135,7 +135,7 @@ class TestingDistortedInt(unittest.TestCase):
     # check through the list
     def test_AssociativeDistortedMultiplication(self):
         print("\nTesting Associative Distorted Multiplication: ")
-        result = AssociativeTest(IsAssociativeDistortedMultiplication)
+        result = associativeTest(IsAssociativeDistortedMultiplication)
         print(str(result))
         flipper = True
         for (n,a) in result:
@@ -149,7 +149,7 @@ class TestingDistortedInt(unittest.TestCase):
                             flipper = False
         self.assertTrue(flipper)
         print("\nTesting Associative Distorted Mult with Iterator: ")
-        iterResult = AssociativeTest(IterIsAssociativeDistortedMultiplication)
+        iterResult = associativeTest(IterIsAssociativeDistortedMultiplication)
         self.assertTrue(result == iterResult)
 
     # Quasi Distributive Distorted Multiplication
