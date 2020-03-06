@@ -53,6 +53,13 @@ class DistortedInt:
 
 
 def HasDistortedIdempotentProperty(n,a):
+    '''
+    returns Boolean representing whether (x*x) = x for given (n, alpha)
+    if so, the Distorted Idempotent Property holds true for all x in Z_n
+
+    :param n: the modulus of the DistortedInt
+    :param alpha: the distortion of the DistortedInt
+    '''
     # range of Zn (ex. Z1 = {0} as provided in spec)
     for i in range(n):
         q = DistortedInt(i,n,a)
@@ -62,6 +69,12 @@ def HasDistortedIdempotentProperty(n,a):
 
 # returns the empty list for n=1, a=0, this should not happen, come back to
 def DistortedRootsOfOne(n,a):
+    '''
+    returns a list of all x in Z_n for which x*x = 1
+
+    :param n: the modulus of the DistortedInt
+    :param alpha: the distortion of the DistortedInt
+    '''
     lst = []
     for i in range(n):
         q = DistortedInt(i,n,a)
@@ -70,6 +83,13 @@ def DistortedRootsOfOne(n,a):
     return lst
 
 def IsCommutativeDistortedMultiplication(n, alpha):
+    '''
+    returns Boolean representing whether (x*y) = (y*x) for given (n, alpha)
+    if so, the Distorted Commutative Multiplication Property holds true for all x,y in Z_n
+
+    :param n: the modulus of the DistortedInt
+    :param alpha: the distortion of the DistortedInt
+    '''
     for x in range(n):
         # avoids redundant checks ex. if 0*1 = 1*0, don't need to check 1*0 = 0*1
         for y in range(x,n):
@@ -80,6 +100,13 @@ def IsCommutativeDistortedMultiplication(n, alpha):
     return True
 
 def IsAssociativeDistortedMultiplication(n, alpha):
+    '''
+    returns Boolean representing whether (x*y)*z = x*(y*z) for given (n, alpha)
+    if so, the Distorted Associative Multiplication Property holds true for all x,y,z in Z_n
+
+    :param n: the modulus of the DistortedInt
+    :param alpha: the distortion of the DistortedInt
+    '''
     for x in range(n):
         first = DistortedInt(x,n,alpha)
         for y in range(x,n):
@@ -91,6 +118,13 @@ def IsAssociativeDistortedMultiplication(n, alpha):
     return True
 
 def IsQuasiDistributiveDistortedMultiplication(n, alpha):
+    '''
+    returns Boolean representing whether (x*y)*z = (x*y)*(x*z) for given (n, alpha)
+    if so, the Distorted Quasi-Distributive (Mult) Property holds true for all x,y,z in Z_n
+
+    :param n: the modulus of the DistortedInt
+    :param alpha: the distortion of the DistortedInt
+    '''
     for x in range(n):
         for y in range(n):
             for z in range(n):

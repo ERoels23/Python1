@@ -5,6 +5,13 @@ from functools import reduce
 class DistortedIntegers:
     # initialisation
     def __init__(self, n, alpha):
+        '''
+        Construct a new 'DistortedIntegers' object
+        Represents the set Z_n for given (n, alpha)
+
+        :param n: the modulus of the DistortedIntegers
+        :param alpha: the distortion of the DistortedIntegers
+        '''
         self.alpha = alpha
         self.n = n
         self.gen = (DistortedInt(x, self.n, self.alpha) for x in range(self.n))
