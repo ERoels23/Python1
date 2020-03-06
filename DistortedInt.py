@@ -39,10 +39,7 @@ class DistortedInt:
         redefines multiplication according to DistortedInt Multiplication
         where x*y = (a*x + (1-a)*y)%n
         '''
-<<<<<<< HEAD
-=======
         # try-except block to validate operands and catch the exception if thrown back
->>>>>>> 88a99edcbde6c421c4b100ba457896a66275b428
         try:
             ValidateOperands(self, other)
             return DistortedInt((self.alpha * self.object + (1 - self.alpha) * other.object) % self.n, self.n, self.alpha)

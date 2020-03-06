@@ -28,7 +28,7 @@ def IterDistortedRootsOfOne(n,a):
     '''
     lst = []
     for i in IteratorOfDistortedIntegers(DistortedIntegers(n,a)):
-        if i*i == DistortedInt(1,n,a):
+        if i*i == DistortedInt(1 % n,n,a):
             lst.append(i*i)
     return lst
 
