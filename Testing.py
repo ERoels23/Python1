@@ -3,9 +3,7 @@ from DistortedInt import *
 from DistortedIntegers import *
 
 class TestingDistortedInt(unittest.TestCase):
-<<<<<<< Updated upstream
-=======
-
+    
     '''
     DistortedInt Creation
     '''
@@ -60,10 +58,14 @@ class TestingDistortedInt(unittest.TestCase):
     def test_InvalidOperandExceptionThrown(self):
         x = DistortedInt(3, 10, 5)
         y = DistortedInt(13, 17, 6)
-        self.assertRaises(InvalidOperandException, print, x * y)
+        self.assertRaises(InvalidOperandException, ValidateOperands, x, y)
+
+
+    '''
+    Additional Requirements
+    '''
 
     # Idempotent Property
->>>>>>> Stashed changes
     def test_HasDistortedIdempotentProperty(self):
         self.assertTrue(TestHasDistortedIdempotentProperty())
     def test_DistortedRootsOfOne(self):
