@@ -90,7 +90,7 @@ def TestIsCommutativeDistortedMultiplication():
         # 0 - (n-1)
         for alpha in range(n):
             if (IsCommutativeDistortedMultiplication(n, alpha) and n % 2 == 0):
-                print("n: " + str(n) + "  " + "a: " + str(alpha))
+                print((n,alpha))
                 return False
     return True
 
@@ -142,7 +142,7 @@ def TestIsQuasiDistributiveDistortedMultiplication():
         # 0 - (n-1)
         for alpha in range(n):
             if (IsQuasiDistributiveDistortedMultiplication(n, alpha)):
-                l.append((n, alpha))
+                l.append((n,alpha))
     return l
 
 

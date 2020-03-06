@@ -58,16 +58,15 @@ def HasDistortedEquationProperty(n,alpha):
     successes = []
     for x in IteratorOfDistortedIntegers(DistortedIntegers(n,alpha)):
         for z in IteratorOfDistortedIntegers(DistortedIntegers(n,alpha)):
-            # for every x and z there is a unique y for x*y = z
+            # for any x and z there is a unique y for x*y = z
             count = 0
             # check every y for x and z
             for y in IteratorOfDistortedIntegers(DistortedIntegers(n,alpha)):
                 if (x*y == z):
-                    # add to list of it working
-                    count += 1
-            # add length of list of equality holding
+                    count++
+            # add count of equality holding
             successes.append(count)
-    # return true if unique, ie. all lists have length 1
+    # return true if unique, ie. all counts are == 1
     return all(count == 1 for count in successes)
 
 
@@ -92,8 +91,14 @@ def TestHasDistortedEquationProperty():
 #             resultSet.add(str(result))
 #     return resultSet
 
-# recursive function to continue down
+# recursive function to continue down branches
 def recursiveResultFinder(generators: [DistortedInt], current, results):
+    '''
+    recursive function to find span of DistortedInt tree
+    param generators: list of distorted integers we are checking span of tree with
+    param current: our current result from previous multiplications of DistortedInts
+    param results: our list of results from multiplications of DistortedInts (stored in String format)
+    '''
     for val in generators:
         res = current * val
         # result is in our list of results, cut off branch
@@ -107,6 +112,11 @@ def recursiveResultFinder(generators: [DistortedInt], current, results):
 
 # initialiser to find span of distortedInt tree
 def spanInit(generators: [DistortedInt]):
+    '''
+    initialiser for recursive function to determine span of the DistortedInt tree
+    param generators: list of distorted integers we are checking span of tree with
+    '''
+    # start with empty list of results to pass into our recursive function
     results = []
     for gen in generators:
         # begin recursion
