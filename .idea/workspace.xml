@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2e1f9547-2a36-42fb-bef3-6a20f2f929b1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing.py" beforeDir="false" afterPath="$PROJECT_DIR$/Testing.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +36,7 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.DistortedInt">
+  <component name="RunManager" selected="Python tests.Unittests in Testing.py">
     <configuration name="DistortedInt" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Python1" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -79,8 +80,23 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Unittests in Testing.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="Python1" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/Testing.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Unittests in Testing.py" />
         <item itemvalue="Python.DistortedInt" />
         <item itemvalue="Python.DistortedIntegers" />
       </list>
@@ -112,22 +128,22 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="535" y="139" key="#DistortedIntegers/0.0.1680.1050@0.0.1680.1050" timestamp="1583431347354" />
-    <state width="1659" height="276" key="GridCell.Tab.0.bottom" timestamp="1583431944379">
+    <state width="1659" height="311" key="GridCell.Tab.0.bottom" timestamp="1583500757499">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1659" height="276" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1583431944379" />
-    <state width="1659" height="276" key="GridCell.Tab.0.center" timestamp="1583431944378">
+    <state width="1659" height="311" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1583500757499" />
+    <state width="1659" height="311" key="GridCell.Tab.0.center" timestamp="1583500757497">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1659" height="276" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1583431944378" />
-    <state width="1659" height="276" key="GridCell.Tab.0.left" timestamp="1583431944364">
+    <state width="1659" height="311" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1583500757497" />
+    <state width="1659" height="311" key="GridCell.Tab.0.left" timestamp="1583500757497">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1659" height="276" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1583431944364" />
-    <state width="1659" height="276" key="GridCell.Tab.0.right" timestamp="1583431944379">
+    <state width="1659" height="311" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1583500757497" />
+    <state width="1659" height="311" key="GridCell.Tab.0.right" timestamp="1583500757498">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1659" height="276" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1583431944379" />
+    <state width="1659" height="311" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1583500757498" />
     <state x="341" y="164" key="SettingsEditor" timestamp="1583431539008">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
