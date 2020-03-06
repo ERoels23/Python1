@@ -65,7 +65,7 @@ class TestingDistortedInt(unittest.TestCase):
     '''
     Additional Requirements
     '''
-    
+
     # Idempotent Property
     def test_HasDistortedIdempotentProperty(self):
         print("\nTesting Idempotent Property: ")
@@ -86,12 +86,15 @@ class TestingDistortedInt(unittest.TestCase):
     def test_DistortedRootsOfOne(self):
         print("\nTesting Roots of One: ")
         flipper = True
-        for n in range(2,101):
+        for n in range(1,101):
             for alpha in range(n):
-                if (len(DistortedRootsOfOne(n, alpha)) != 1):
+                if len(DistortedRootsOfOne(n, alpha)) != 1:
                     flipper = False
+        
         self.assertTrue(flipper)
+        print(str(flipper))
         print("\nTesting Roots of One (with Iterator): ")
+        flipper = True
         for n in range(2,101):
             for alpha in range(n):
                 if (len(IterDistortedRootsOfOne(n, alpha)) != 1):
@@ -192,7 +195,7 @@ class TestingDistortedInt(unittest.TestCase):
         print("Testing spanInit Test Cases: ")
         vals = [DistortedInt(1,5,3), DistortedInt(2,5,3)]
         s = spanInit(vals)
-        # expected result:
+        # expected result (weird ordering to match output from function):
         r = ["<1 mod 5 | 3 >", "<4 mod 5 | 3 >", "<0 mod 5 | 3 >", "<3 mod 5 | 3 >", "<2 mod 5 | 3 >"]
         self.assertTrue(s == r)
 
