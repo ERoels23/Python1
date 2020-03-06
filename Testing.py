@@ -45,7 +45,7 @@ class TestingDistortedInt(unittest.TestCase):
                 if IsCommutativeDistortedMultiplication(n, alpha):
                     l.append((n,alpha))
         print("\nTesting Commutative Multiplication: " + str(l))
-        print("\nTesting for All Off Modulus: " + str(all(n % 2 != 0 for (n,a) in l)))
+        print("\nTesting for All Odd Modulus: " + str(all(n % 2 != 0 for (n,a) in l)))
         flipper = True
         for n in range(1, 101):
             for alpha in range(n):
