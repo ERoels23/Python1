@@ -16,50 +16,52 @@ class DistortedIntegers:
         self.n = n
         self.gen = (DistortedInt(x, self.n, self.alpha) for x in range(self.n))
 
-    # def gen(self):
-    #     return
-    #     for x in range(self.n):
-    #         yield DistortedInt(x, self.n, self.alpha)
-    #     #
-    # overwrite "print"
     def __str__(self):
+        '''
+        returns a String representation of the DistortedIntegers object
+        '''
         # for x in range(self.n):
         #     print(DistortedInt(x, self.n, self.alpha))
         for x in self.gen:
             return str(x)
 
     def size(self):
+        '''
+        returns the size of the DistortedIntegers object
+        (the number of elements in the list of DistortedInt's)
+        '''
         return self.n
-
-
-# class IteratorOfDistortedIntegers:
-#     # d is type DistortedIntegers
-#     def __init__(self, d):
-#         self.distortedInteger = d
-#         self.start = 0
-#         self.end = d.size() - 1
-#
-#     def __iter__(self):
-#         return self
-#
-#     def __next__(self):
-#         if self.start <= self.end:
-#             self.start += 1
-#             return DistortedInt(self.start-1, self.distortedInteger.n, self.distortedInteger.alpha)
-#         raise StopIteration
 
 class IteratorOfDistortedIntegers:
     # d is type DistortedIntegers
     def __init__(self, d):
+        '''
+        Construct a new IteratorOfDistortedIntegers object
+
+        :param d: the DistortedIntegers list to be iterated through
+        '''
         self.distortedInteger = d
 
     def __iter__(self):
+        '''
+        returns the Iterator object itself
+        '''
         return self
 
     def __next__(self):
+        '''
+        advances the Iterator to the next element in the list DistortedIntegers
+        '''
         return next(self.distortedInteger.gen)
 
 def HasDistortedEquationProperty(n,alpha):
+    '''
+    returns Boolean representing whether x*y = z for given (n, alpha) and unique y
+    if so, the Distorted Equation Property holds true for all x,z in Z_n
+
+    :param n: the modulus of the DistortedInt
+    :param alpha: the distortion of the DistortedInt
+    '''
     successes = []
     for x in IteratorOfDistortedIntegers(DistortedIntegers(n,alpha)):
         for z in IteratorOfDistortedIntegers(DistortedIntegers(n,alpha)):
@@ -75,24 +77,14 @@ def HasDistortedEquationProperty(n,alpha):
     # return true if unique, ie. all counts are == 1
     return all(count == 1 for count in successes)
 
-# def calc(distortedInts):
-#     resultSet = set()
-#     # go through every number of combinations ex. [1,2,3] = permute 2, permute 3
-#     for i in range(2, len(distortedInts)+1):
-#         # go through every possible combination
-#         for k in permutations(distortedInts, i):
-#             result = reduce((lambda x, y: x * y), k)
-#             # converted to string to avoid duplicate distorted ints
-#             resultSet.add(str(result))
-#     return resultSet
-
 # recursive function to continue down branches
 def recursiveResultFinder(generators: [DistortedInt], current, results):
     '''
     recursive function to find span of DistortedInt tree
-    param generators: list of distorted integers we are checking span of tree with
-    param current: our current result from previous multiplications of DistortedInts
-    param results: our list of results from multiplications of DistortedInts (stored in String format)
+
+    :param generators: list of distorted integers we are checking span of tree with
+    :param current: our current result from previous multiplications of DistortedInts
+    :param results: our list of results from multiplications of DistortedInts (stored in String format)
     '''
     for val in generators:
         res = current * val
@@ -109,7 +101,8 @@ def recursiveResultFinder(generators: [DistortedInt], current, results):
 def spanInit(generators: [DistortedInt]):
     '''
     initialiser for recursive function to determine span of the DistortedInt tree
-    param generators: list of distorted integers we are checking span of tree with
+
+    :param generators: list of distorted integers we are checking span of tree with
     '''
     # start with empty list of results to pass into our recursive function
     results = []
@@ -120,7 +113,6 @@ def spanInit(generators: [DistortedInt]):
 
 if __name__ == '__main__':
     # testing purposes only
-    # doesn't do anything at the moment
     vals = [DistortedInt(1,5,3), DistortedInt(2,5,3)]
     print(vals)
     s = spanInit(vals)
