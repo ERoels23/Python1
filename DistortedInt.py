@@ -1,3 +1,6 @@
+from Validation import *
+
+
 class DistortedInt:
     '''
     encapsulates a Distorted Integer <object mod n | alpha>
@@ -11,27 +14,39 @@ class DistortedInt:
         :param n: the modulus of the DistortedInt
         :param alpha: the distortion of the DistortedInt
         '''
-        self.object = obj
-        self.alpha = alpha
-        self.n = n
+
+        try:
+            ValidateArguments(obj, n, alpha)
+            self.object = obj
+            self.alpha = alpha
+            self.n = n
+        except InvalidArgumentException:
+            print("Invalid arguments given\n{ modulus 'n' > x, alpha >= 0 }")
+        except Exception as e:
+            print(e)
 
     # overwrite "print"
     def __str__(self):
         '''
         returns a string representation of a DistortedInt object
         '''
-        return "< "+str(self.object)+" mod "+str(self.n)+" | "+str(self.alpha)+" >"
+        return "<"+str(self.object)+" mod "+str(self.n)+" | "+str(self.alpha)+" >"
 
     # define "*"
-    def __mul__(self,other):
+    def __mul__(self, other):
         '''
         redefines multiplication according to DistortedInt Multiplication
         where x*y = (a*x + (1-a)*y)%n
         '''
-        if (self.alpha == other.alpha) & (self.n == other.n):
-            return DistortedInt((self.alpha*self.object + (1-self.alpha)*other.object) % self.n, self.n, self.alpha)
-        else:
-            print("Values must share 'n' and 'alpha' values")
+        # if (self.alpha == other.alpha) & (self.n == other.n):
+        #     return DistortedInt((self.alpha*self.object + (1-self.alpha)*other.object) % self.n, self.n, self.alpha)
+        # else:
+        #     print("Values must share 'n' and 'alpha' values")
+        try:
+            ValidateOperands(self, other)
+            return DistortedInt((self.alpha * self.object + (1 - self.alpha) * other.object) % self.n, self.n, self.alpha)
+        except InvalidOperandException:
+            print("Operands must be defined for same modulus 'n' and distortion 'alpha'.")
 
     def __eq__(self,other):
         return isinstance(other, self.__class__) and self.alpha == other.alpha and self.n == other.n and self.object == other.object

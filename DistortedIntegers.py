@@ -63,8 +63,9 @@ def HasDistortedEquationProperty(n,alpha):
             # check every y for x and z
             for y in IteratorOfDistortedIntegers(DistortedIntegers(n,alpha)):
                 if (x*y == z):
-                    count++
-            # add count of equality holding
+                    # add to list of it working
+                    count += 1
+            # add length of list of equality holding
             successes.append(count)
     # return true if unique, ie. all counts are == 1
     return all(count == 1 for count in successes)
