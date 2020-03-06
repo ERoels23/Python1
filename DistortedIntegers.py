@@ -14,16 +14,12 @@ class DistortedIntegers:
         '''
         self.alpha = alpha
         self.n = n
-        self.gen = (DistortedInt(x, self.n, self.alpha) for x in range(self.n))
 
     def __str__(self):
         '''
         returns a String representation of the DistortedIntegers object
         '''
-        # for x in range(self.n):
-        #     print(DistortedInt(x, self.n, self.alpha))
-        for x in self.gen:
-            return str(x)
+        return ("Distorted Integers | n = " + str(self.n) + ", alpha = " + str(self.alpha) + " |")
 
     def size(self):
         '''
@@ -41,6 +37,7 @@ class IteratorOfDistortedIntegers:
         :param d: the DistortedIntegers list to be iterated through
         '''
         self.distortedInteger = d
+        self.start = 0
 
     def __iter__(self):
         '''
@@ -52,7 +49,11 @@ class IteratorOfDistortedIntegers:
         '''
         advances the Iterator to the next element in the list DistortedIntegers
         '''
-        return next(self.distortedInteger.gen)
+        if self.start < self.distortedInteger.size:
+            self.start += 1
+            return DistortedInt(self.start-1, self.distortedInteger.n, self.distortedInteger.alpha)
+        else:
+            raise StopIteration
 
 def HasDistortedEquationProperty(n,alpha):
     '''
@@ -117,3 +118,57 @@ if __name__ == '__main__':
     print(vals)
     s = spanInit(vals)
     print(s)
+
+#
+#
+# class DistortedIntegers:
+#     # initialisation
+#     def __init__(self, n, alpha):
+#         '''
+#         Construct a new 'DistortedIntegers' object
+#         Represents the set Z_n for given (n, alpha)
+#
+#         :param n: the modulus of the DistortedIntegers
+#         :param alpha: the distortion of the DistortedIntegers
+#         '''
+#         self.alpha = alpha
+#         self.n = n
+#         self.gen = (DistortedInt(x, self.n, self.alpha) for x in range(self.n))
+#
+#     def __str__(self):
+#         '''
+#         returns a String representation of the DistortedIntegers object
+#         '''
+#         # for x in range(self.n):
+#         #     print(DistortedInt(x, self.n, self.alpha))
+#         for x in self.gen:
+#             return str(x)
+#
+#     def size(self):
+#         '''
+#         returns the size of the DistortedIntegers object
+#         (the number of elements in the list of DistortedInt's)
+#         '''
+#         return self.n
+#
+# class IteratorOfDistortedIntegers:
+#     # d is type DistortedIntegers
+#     def __init__(self, d):
+#         '''
+#         Construct a new IteratorOfDistortedIntegers object
+#
+#         :param d: the DistortedIntegers list to be iterated through
+#         '''
+#         self.distortedInteger = d
+#
+#     def __iter__(self):
+#         '''
+#         returns the Iterator object itself
+#         '''
+#         return self
+#
+#     def __next__(self):
+#         '''
+#         advances the Iterator to the next element in the list DistortedIntegers
+#         '''
+#         return next(self.distortedInteger.gen)
