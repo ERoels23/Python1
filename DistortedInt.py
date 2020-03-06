@@ -36,6 +36,7 @@ class DistortedInt:
     def __eq__(self,other):
         return isinstance(other, self.__class__) and self.alpha == other.alpha and self.n == other.n and self.object == other.object
 
+
 def HasDistortedIdempotentProperty(n,a):
     # range of Zn (ex. Z1 = {0} as provided in spec)
     for i in range(n):
@@ -53,44 +54,13 @@ def DistortedRootsOfOne(n,a):
             lst.append(q*q)
     return lst
 
-
-def TestHasDistortedIdempotentProperty():
-    # 1 - 100
-    for n in range(1, 101):
-        # 0 - (n-1)
-        for alpha in range(n):
-            if (not HasDistortedIdempotentProperty(n, alpha)):
-                return False
-    return True
-
-# since 1 is in Zn, start from 2 rather than 1???
-def TestDistortedRootsOfOne():
-    # 1 - 100
-    for n in range(2,101):
-        # 0 - (n-1)
-        for alpha in range(n):
-            if (len(DistortedRootsOfOne(n, alpha)) != 1):
-                return False
-    return True
-
 def IsCommutativeDistortedMultiplication(n, alpha):
     for x in range(n):
-        # avoids redundant checks ex. if 0*1 = 1*0,
-        # don't need to check 1*0 = 0*1
+        # avoids redundant checks ex. if 0*1 = 1*0, don't need to check 1*0 = 0*1
         for y in range(x,n):
             first = DistortedInt(x, n, alpha)
             second = DistortedInt(y,n,alpha)
             if (first*second != second*first):
-                return False
-    return True
-
-def TestIsCommutativeDistortedMultiplication():
-    # 1 - 100
-    for n in range(1, 101):
-        # 0 - (n-1)
-        for alpha in range(n):
-            if (IsCommutativeDistortedMultiplication(n, alpha) and n % 2 == 0):
-                print("n: " + str(n) + "  " + "a: " + str(alpha))
                 return False
     return True
 
@@ -105,24 +75,6 @@ def IsAssociativeDistortedMultiplication(n, alpha):
                     return False
     return True
 
-def TestIsAssociativeDistortedMultiplication():
-    lst = []
-    for n in range(1,21):
-        for a in range(n):
-            if IsAssociativeDistortedMultiplication(n, a):
-                lst.append((n,a))
-    return lst
-
-def TestIsCommutativeDistortedMultiplication():
-    l = []
-    # 1 - 100
-    for n in range(1, 101):
-        # 0 - (n-1)
-        for alpha in range(n):
-            if IsCommutativeDistortedMultiplication(n, alpha):
-                l.append((n,alpha))
-    return l
-
 def IsQuasiDistributiveDistortedMultiplication(n, alpha):
     for x in range(n):
         for y in range(n):
@@ -134,24 +86,6 @@ def IsQuasiDistributiveDistortedMultiplication(n, alpha):
                     return False
     return True
 
-
-def TestIsQuasiDistributiveDistortedMultiplication():
-    l = []
-    # 1 - 20
-    for n in range(1, 21):
-        # 0 - (n-1)
-        for alpha in range(n):
-            if (IsQuasiDistributiveDistortedMultiplication(n, alpha)):
-                l.append((n, alpha))
-    return l
-
-
 # main for testing purposes...
 if __name__ == "__main__":
-    print("Testing Idempotent Property: " + str(TestHasDistortedIdempotentProperty()))
-    print("Testing Roots of One: " + str(TestDistortedRootsOfOne()))
-    commutativeList = TestIsCommutativeDistortedMultiplication()
-    print("Testing Commutative Multiplication: " + str(commutativeList))
-    print("Testing all odd modulus Commutative Multiplication: " + str(all(n % 2 != 0 for (n,a) in commutativeList)))
-    print("Testing Quasi Distributive Multiplication: " + str(TestIsQuasiDistributiveDistortedMultiplication()))
-    print("Testing Associative Distorted Multiplication: " + str(TestIsAssociativeDistortedMultiplication()))
+    print("testing is done within the Testing.py document")
