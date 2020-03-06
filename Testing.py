@@ -86,6 +86,5 @@ class TestingDistortedInt(unittest.TestCase):
         self.assertTrue(flipper)
 
 
-
 if __name__ == '__main__':
     unittest.main()
