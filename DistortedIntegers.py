@@ -139,17 +139,8 @@ if __name__ == '__main__':
 #         '''
 #         returns a String representation of the DistortedIntegers object
 #         '''
-#         # for x in range(self.n):
-#         #     print(DistortedInt(x, self.n, self.alpha))
-#         for x in self.gen:
-#             return str(x)
+#         return [str(d) for d in self.gen]
 #
-#     def size(self):
-#         '''
-#         returns the size of the DistortedIntegers object
-#         (the number of elements in the list of DistortedInt's)
-#         '''
-#         return self.n
 #
 # class IteratorOfDistortedIntegers:
 #     # d is type DistortedIntegers

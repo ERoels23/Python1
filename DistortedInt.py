@@ -22,7 +22,7 @@ class DistortedInt:
             self.alpha = alpha
             self.n = n
         except InvalidArgumentException:
-            print("Invalid arguments given\n{ modulus 'n' > x, alpha >= 0 }")
+            print("Invalid arguments given for alpha or x, expected arguments:\n{0 <= x < modulus 'n', 0 <= alpha < n }")
         except Exception as e:
             print(e)
 
@@ -39,7 +39,10 @@ class DistortedInt:
         redefines multiplication according to DistortedInt Multiplication
         where x*y = (a*x + (1-a)*y)%n
         '''
+<<<<<<< HEAD
+=======
         # try-except block to validate operands and catch the exception if thrown back
+>>>>>>> 88a99edcbde6c421c4b100ba457896a66275b428
         try:
             ValidateOperands(self, other)
             return DistortedInt((self.alpha * self.object + (1 - self.alpha) * other.object) % self.n, self.n, self.alpha)
@@ -47,6 +50,9 @@ class DistortedInt:
             print("Operands must be defined for same modulus 'n' and distortion 'alpha'.")
 
     def __eq__(self,other):
+        '''
+        defines equality between two distorted integers
+        '''
         return isinstance(other, self.__class__) and self.alpha == other.alpha and self.n == other.n and self.object == other.object
 
 
@@ -76,7 +82,8 @@ def DistortedRootsOfOne(n,a):
     lst = []
     for i in range(n):
         q = DistortedInt(i,n,a)
-        if q*q == DistortedInt(1,n,a):
+        # 1 % 1 == 0, else == 1
+        if q*q == DistortedInt(1 % n,n,a):
             lst.append(q*q)
     return lst
 
