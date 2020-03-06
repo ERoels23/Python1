@@ -70,17 +70,6 @@ def HasDistortedEquationProperty(n,alpha):
     # return true if unique, ie. all lists have length 1
     return all(count == 1 for count in successes)
 
-
-
-def TestHasDistortedEquationProperty():
-    l = []
-    for n in range(1,21):
-        for alpha in range(n):
-            if HasDistortedEquationProperty(n,alpha):
-                l.append((n,alpha))
-    return l
-
-
 # def calc(distortedInts):
 #     resultSet = set()
 #     # go through every number of combinations ex. [1,2,3] = permute 2, permute 3
@@ -114,6 +103,7 @@ def spanInit(generators: [DistortedInt]):
     return results # return list of distortedInts in tree span found
 
 if __name__ == '__main__':
+    #testing purposes only
     a = DistortedInt(1,5,3)
     b = DistortedInt(2,5,3)
     # c = DistortedInt(6,7,3)
@@ -128,9 +118,3 @@ if __name__ == '__main__':
     s.sort()
     for i in s:
         print(i)
-
-    print("Testing Distorted Equation Property: " + str(TestHasDistortedEquationProperty()))
-
-
-    for x in IteratorOfDistortedIntegers(DistortedIntegers(3,2)):
-        print(x)
