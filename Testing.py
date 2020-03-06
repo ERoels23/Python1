@@ -121,9 +121,9 @@ class TestingDistortedInt(unittest.TestCase):
         print("Testing Distorted Integers Iterator: ")
         l = []
         for x in IteratorOfDistortedIntegers(DistortedIntegers(3,2)):
-            print(str(x))
             l.append(str(x))
-        c = ["< 0 mod 3 | 2 >","< 1 mod 3 | 2 >","< 2 mod 3 | 2 >"]
+        print(str(l))
+        c = ["<0 mod 3 | 2 >","<1 mod 3 | 2 >","<2 mod 3 | 2 >"]
         self.assertTrue(l == c)
 
 if __name__ == '__main__':
