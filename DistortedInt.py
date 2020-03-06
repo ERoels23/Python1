@@ -15,6 +15,7 @@ class DistortedInt:
         :param alpha: the distortion of the DistortedInt
         '''
 
+        # try-except block to test for valid arguments and handle exception if returned
         try:
             ValidateArguments(obj, n, alpha)
             self.object = obj
@@ -38,10 +39,7 @@ class DistortedInt:
         redefines multiplication according to DistortedInt Multiplication
         where x*y = (a*x + (1-a)*y)%n
         '''
-        # if (self.alpha == other.alpha) & (self.n == other.n):
-        #     return DistortedInt((self.alpha*self.object + (1-self.alpha)*other.object) % self.n, self.n, self.alpha)
-        # else:
-        #     print("Values must share 'n' and 'alpha' values")
+        # try-except block to validate operands and catch the exception if thrown back
         try:
             ValidateOperands(self, other)
             return DistortedInt((self.alpha * self.object + (1 - self.alpha) * other.object) % self.n, self.n, self.alpha)
